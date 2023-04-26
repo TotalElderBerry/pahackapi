@@ -30,7 +30,8 @@ employeeModel.getEmployeebyId = (employeeId,callback) => {
                 "work_type": res[0]['work_type'],
                 "PTO": res[0]['PTO'],
                 "holiday_off": res[0]['holiday_off'],
-                "location": res[0]['locatin']
+                "location": res[0]['locatin'],
+                "remarks": res[0]['remarks']
             }
             callback(employee)
         }

@@ -3,6 +3,7 @@ const app = express()
 
 const employeeGet = require('./http/get/employee.get')
 const teamGet = require('./http/get/team.get')
+const adminGet = require('./http/get/admin.get')
 const departmentGet = require('./http/get/department.get')
 
 const employeePost = require('./http/post/employee.post')
@@ -23,6 +24,7 @@ app.use('/api/employee',employeeGet,employeePost)
 app.use('/api/team',teamGet,teamPost)
 app.use('/api/teamlead',teamLeadPost)
 app.use('/api/departments',departmentGet)
+app.use('/api/admin',adminGet)
 
 app.listen(8000,() => {
     console.log("Listening at port 8000");

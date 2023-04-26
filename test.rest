@@ -9,6 +9,11 @@ GET http://localhost:8000/api/team HTTP/1.1 content-type: application/json
 GET http://localhost:8000/api/departments HTTP/1.1
 content-type: application/json
 
+### get admin master page
+
+GET http://localhost:8000/api/admin/masterpage HTTP/1.1
+content-type: application/json
+
 ### add employee
 POST http://localhost:8000/api/employee HTTP/1.1 
 content-type: application/json
@@ -41,6 +46,8 @@ content-type: application/json
     "department_id": 1,
     "employee_id": 6    
 }
+
+
 
 ### add teamlead 
 POST http://localhost:8000/api/teamlead HTTP/1.1 
