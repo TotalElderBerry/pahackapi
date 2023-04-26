@@ -17,15 +17,19 @@ const teamsGet = require('./http/get/teams.get')
 
 const teamDelete = require('./http/delete/team.delete')
 
+const teamPut = require('./http/put/team.put')
 
-// app.use(cors({
-//     origin: '*'
-// }));
+// app.use("*", (req, res) => {
+//     const pathname = req.originalUrl.split("?")[0];
 
-// app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+    origin: '*'
+}));
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/employee',employeeGet,employeePost)
-app.use('/api/team',teamGet,teamPost,teamDelete);
+app.use('/api/team',teamGet,teamPost,teamDelete, teamPut);
 app.use('/api/teamlead',teamLeadPost)
 app.use('/api/departments',departmentGet)
 app.use('/api/admin',adminGet,adminPost)
