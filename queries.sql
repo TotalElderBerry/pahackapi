@@ -14,7 +14,7 @@ insert into department (department_name) values ('INFORMATION TECHNOLOGY');
 insert into department (department_name) values ('QUALITY ASSURANCE');
 insert into department (department_name) values ('SOFTWARE DEVELOPMENT');
 
-insert into team (team_name) values ('COMPLIANCE SUPPORT');
+insert into team (team_id,team_name) values (0,'COMPLIANCE SUPPORT');
 insert into team (team_name) values ('CORPORATE');
 insert into team (team_name) values ('CUSTOMER SUPPORT');
 insert into team (team_name) values ('DATA ANALYST');

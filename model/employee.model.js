@@ -4,7 +4,9 @@ const userModel = require('./user.model')
 const employeeModel = {}
 
 employeeModel.getEmployeebyId = (employeeId,callback) => {
-    const query = `SELECT * from employee inner join user on user.user_id = ${employeeId}`
+    // const query = `SELECT * from employee inner join user on user.user_id = ${employeeId}`
+    // const query = `select * from user left join employee on employee.user_id = user.user_id and employee.user_id = 13 where employee.user_id = 13`
+    const query = `select * from employee left join user on employee.employee_id = ${employeeId} and employee.user_id = user.user_id where employee.employee_id = ${employeeId}`
 
     db.query(query, (err, res) => {
         if(err) {
@@ -14,7 +16,6 @@ employeeModel.getEmployeebyId = (employeeId,callback) => {
         if(res){
             const employee = {
                 "employee_id": res[0]['employee_id'],
-
                 "first_name": res[0]['first_name'],
                 "last_name": res[0]['last_name'],
                 "middle_name": res[0]['middle_name'],

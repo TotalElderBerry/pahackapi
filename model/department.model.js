@@ -14,7 +14,7 @@ departmentModel.getDepartments = (callback) => {
         if(err) throw err
         for(const department in res){
             teamModel.getTeamsbyDepartmentId(res[department]['department_id'], (teams) => {
-                if(res.length > 0){
+                    // console.log("teams: ",teams);
                     const departmentDetails = {
                         "department_details": {
                             "department_id": res[department]['department_id'],
@@ -24,10 +24,10 @@ departmentModel.getDepartments = (callback) => {
                     }
                     console.log(departmentDetails);
                     departments.push(departmentDetails)
-                }
-                callback(departments)
-            })
-        }
+                
+                    callback(departments)
+                })
+            }
     })
 
 }
@@ -37,6 +37,9 @@ departmentModel.addEmployee = () => {
     // const query = 
 }
 
+departmentModel.addTeam = () => {
+    const query = ``
+}
 
 
 module.exports = departmentModel
