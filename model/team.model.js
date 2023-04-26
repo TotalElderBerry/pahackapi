@@ -18,6 +18,34 @@ teamModel.addTeam = (name, callback) => {
     });
 };
 
+teamModel.editTeam = (id, name, callback) => {
+    const query = `UPDATE team SET team_name = ? WHERE team_id = ?`
+
+    db.query(query, [name, id], (err, res) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+
+        // Get the affected rows
+        callback();
+    });
+};
+
+teamModel.deleteTeamById = (id, callback) => {
+    const query = `DELETE FROM team WHERE team_id = ?`;
+
+    db.query(query, [id], (err, res) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+
+        // Get the affected rows
+        callback();
+    });
+};
+
 teamModel.getTeams = (callback) => {
     const query = "SELECT * from team"
    

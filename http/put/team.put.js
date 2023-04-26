@@ -3,16 +3,18 @@ const app = express()
 
 const teamModel = require('../../model/team.model')
 
-app.delete('/:id', (req,res) => {
-    const teamId = req.params.id
+app.put("/:id",(req,res) => {
+    const id = req.params.id;
+    const name = req.body.name
 
     try {
-        teamModel.deleteTeamById(teamId,() => {
-            res.status(200).send({"success": true })
+        teamModel.editTeam(id, name, () => {
+            res.status(200).send({ "success": true })
         })
     } catch (error) {
         console.log(error);
     }
-})
+});
+
 
 module.exports = app
