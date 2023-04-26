@@ -24,8 +24,8 @@ POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Floyd",
-    "last_name": "Mayweeathger",
+    "first_name": "Anotherpne",
+    "last_name": "tesdtsat",
     "middle_name": "Hulk",
     "email": "hahah@gmail.com",
     "birth_date": "11/12/2001",
@@ -34,9 +34,6 @@ content-type: application/json
     "mobile_number": "09154156111",
     "password": "pass123",
     "status": "active",
-    "shift_schedule": "A",
-    "work_type": 0,
-    "PTO": 0,
     "department_id": 2,
     "team_id": 57
 }

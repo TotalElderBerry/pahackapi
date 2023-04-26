@@ -18,10 +18,10 @@ adminModel.getMasterPageData = (callback) => {
             employeeModel.getEmployeebyId(res[data]['employee_id'], (employee) => {
                 const {first_name, last_name, PTO, holiday_off, location, work_type, shift_schedule,remarks} = employee
                 row.employeeName = first_name + " " + last_name
-                row.PTO = PTO
+                row.PTO = (PTO == 0)?'Unplanned Leave':'Planned Leave'
                 row.holiday_off = holiday_off
-                row.location = location
-                row.work_type = work_type
+                row.location = (location == 0)?'Outside Cebu':'Within Cebu'
+                row.work_type = (work_type == 0)?'WFH':'Onsite'
                 row.shift_schedule = shift_schedule
                 row.remarks = remarks
                 all.push(row)

@@ -45,10 +45,10 @@ employeeModel.addEmployee = (fields) => {
     userModel.addUser(fields,(insertId) => {
         const {status,shift_schedule,work_type,PTO} = fields;
 
-        const query = 'INSERT INTO employee (user_id,status,shift_schedule,work_type,PTO,holiday_off,locatin) values (?,?,?,?,?,0,0)'
+        const query = 'INSERT INTO employee (user_id,status,shift_schedule,work_type,PTO,holiday_off,locatin) values (?,?,"A",0,0,0,0)'
         console.log(status);
 
-        db.query(query,[insertId,status,shift_schedule,work_type,PTO],(err,res) => {
+        db.query(query,[insertId,status,],(err,res) => {
             console.log("inside callback");
             console.log(err);
             if(err){
