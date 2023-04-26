@@ -1,4 +1,5 @@
-const db = require('../db/db')
+const db = require('../db/db');
+const employeeModel = require('./employee.model');
 
 const userModel = {}
 
@@ -37,6 +38,8 @@ userModel.addUser = (fields, callback) => {
         callback(user_details)
     })
  }
+
+
 
 
 

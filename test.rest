@@ -14,8 +14,13 @@ content-type: application/json
 GET http://localhost:8000/api/admin/masterpage HTTP/1.1
 content-type: application/json
 
+### get all users
+
+GET http://localhost:8000/api/users HTTP/1.1
+content-type: application/json
+
 ### add employee
-POST http://localhost:8000/api/employee HTTP/1.1 
+POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
 
 {
@@ -65,4 +70,20 @@ content-type: application/json
     "password": "pass123",
     "department_id": 1,    
     "team_id": 55
+}
+
+### add admin 
+POST http://localhost:8000/api/admin HTTP/1.1 
+content-type: application/json
+
+{
+    "first_name": "Admin Kyriw",
+    "last_name": "Irving",
+    "middle_name": "Poole",
+    "email": "Kyire@gmail.com",
+    "birth_date": "10/12/2000",
+    "gender": "M",
+    "address": "Talamban Cebu",
+    "mobile_number": "09154156111",
+    "password": "pass123",
 }

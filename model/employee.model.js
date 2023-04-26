@@ -63,9 +63,26 @@ employeeModel.addEmployee = (fields) => {
     })    
  }
 
- employeeModel.getEmployees = () => {
+ employeeModel.getEmployees = (callback) => {
+    const query = `select * from employee inner join user on user.user_id = employee.user_id`
 
- }
+    db.query(query,(err,res) => {
+        if(err) throw err
+        if(res.length > 0){
+            const all_employee = []
+            for(const emp in res){
+                const employee = {}
+                employee.employee_id = res[emp]['employee_id'],
+                employee.name = res[emp]['first_name'] + " " + res[emp]['last_name']
+                employee.email = res[emp]['email'],
+                employee.password = res[emp]['password']
+                all_employee.push(employee)
+            }
+            // console.log(all_employee);
+            callback(all_employee)
+        }
+    })
+}
 
 
 

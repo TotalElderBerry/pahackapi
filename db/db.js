@@ -4,7 +4,7 @@ const db_conn = sql.createConnection(
     {
         host: "localhost",
         user: "root",
-        password: "wmdc123",
+        password: "password",
         database: "hackathondb"
     }
 )
