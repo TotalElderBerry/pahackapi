@@ -271,3 +271,30 @@ CREATE TABLE `admin` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `attendance` (
+  `attendance_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `date` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`attendance_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+SELECT d.department_name AS department,
+       t.team_name AS `group/team`,
+       CONCAT(u.first_name, ' ', u.last_name) AS employeeName,
+       e.PTO,
+       e.holiday_off,
+       e.locatin AS location,
+       e.work_type,
+       e.shift_schedule,
+       e.remarks
+FROM user u
+INNER JOIN employee e ON u.user_id = e.user_id
+INNER JOIN teamcomposition tc ON e.employee_id = tc.employee_id
+INNER JOIN team t ON tc.team_id = t.team_id
+INNER JOIN departmentcomposition dc ON t.team_id = dc.team_id
+INNER JOIN department d ON dc.department_id = d.department_id;

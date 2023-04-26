@@ -1,5 +1,9 @@
-GET http://localhost:8000/api/employee HTTP/1.1 content-type: application/json
+GET http://localhost:8000/api/employee HTTP/1.1
+content-type: application/json
 
+{
+    "employee_id": 6
+}
 ###
 
 GET http://localhost:8000/api/team HTTP/1.1 content-type: application/json
@@ -19,6 +23,14 @@ content-type: application/json
 GET http://localhost:8000/api/users HTTP/1.1
 content-type: application/json
 
+### get teamlead
+
+GET http://localhost:8000/api/teamlead HTTP/1.1
+content-type: application/json
+
+{
+    "team_lead_id": 4
+}
 ### add employee
 POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
@@ -54,7 +66,7 @@ POST http://localhost:8000/api/teamlead HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "TL Lebron",
+    "first_name": "TL Kobe",
     "last_name": "James",
     "middle_name": "Lisondra",
     "email": "lebron@gmail.com",
@@ -63,8 +75,8 @@ content-type: application/json
     "address": "Talamban Cebu",
     "mobile_number": "09154156111",
     "password": "pass123",
-    "department_id": 1,    
-    "team_id": 55
+    "department_id": 2,    
+    "team_id": 57
 }
 
 ### add admin 

@@ -13,6 +13,7 @@ const employeePost = require('./http/post/employee.post')
 const adminPost = require('./http/post/admin.post')
 const teamPost = require('./http/post/team.post')
 const teamLeadPost = require('./http/post/teamlead.post')
+const teamLeadGet = require('./http/get/teamlead.get')
 const departmentPost = require('./http/post/department.post')
 
 const teamsGet = require('./http/get/teams.get')
@@ -36,7 +37,7 @@ app.use(express.json())
 
 app.use('/api/employee',employeeGet,employeePost)
 app.use('/api/team',teamGet,teamPost,teamDelete, teamPut);
-app.use('/api/teamlead',teamLeadPost)
+app.use('/api/teamlead',teamLeadPost,teamLeadGet)
 app.use('/api/departmentTeams',departmentGet)
 app.use('/api/admin',adminGet)
 

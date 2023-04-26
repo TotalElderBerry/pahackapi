@@ -94,31 +94,3 @@ departmentModel.addTeam = () => {
 
 
 module.exports = departmentModel
-// "teams": [
-//     {
-//         "team_details": {
-//             "team_id": 0,
-//             "team_name": "",
-//         },
-//         "emloyee": [
-//             {
-//                 "employee_id": 0,
-//                 "first_name": "",
-//                 "last_name": "",
-//                 "middle_name": "",
-//                 "email": "",
-//                 "birthdate": "",
-//                 "gender": "",
-//                 "address": "",
-//                 "mobile_number": "",
-//                 "status": "",
-//                 "shift_schedule": "",
-//                 "work_type": 0,
-//                 "PTO": 0,
-//                 "holiday_off": 0,
-//                 "location": 0
-//             }
-//         ],
-//     "hybrid_schedule": "A"
-//     }
-// ]

@@ -1,5 +1,6 @@
 const db = require('../db/db')
 const teamModel = require('./team.model')
+const teamleadModel = require('./teamlead.model')
 const userModel = require('./user.model')
 
 const employeeModel = {}
@@ -81,6 +82,30 @@ employeeModel.addEmployee = (fields) => {
             // console.log(all_employee);
             callback(all_employee)
         }
+    })
+}
+
+employeeModel.getUserEmployee = (employee_id,callback) =>{
+    const query = `select * from teamcomposition inner join departmentcomposition on teamcomposition.department_id = departmentcomposition.department_id inner join department on department.department_id = departmentcomposition.department_id where teamcomposition.employee_id = ${employee_id}`
+
+    db.query(query,(err,res) => {
+        if(err) throw err
+        const data = {}
+        data.department_name = res[0]['department_name'] 
+        data.team_id = res[0]['team_id']
+        employeeModel.getEmployeebyId(employee_id,(employee) => {
+            data.name = employee.first_name +" "+employee.last_name
+            data.shift_schedule = employee.shift_schedule
+            data.work_type = employee.work_type
+            data.PTO = employee.PTO
+            data.holiday_off = employee.holiday_off
+            data.location = data.location
+            teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (team_lead) => {
+                data.team_leader_name = team_lead.first_name + " " + team_lead.last_name
+                console.log(data);
+                callback(data)
+            })
+        })
     })
 }
 

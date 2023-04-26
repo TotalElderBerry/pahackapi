@@ -5,7 +5,7 @@ const userModel = require('./user.model')
 const adminModel = {}
 
 adminModel.getMasterPageData = (callback) => {
-    const query = `select * from departmentcomposition inner join department on department.department_id = departmentcomposition.department_composition_id inner join teamcomposition on teamcomposition.department_id = departmentcomposition.department_id and teamcomposition.team_id = departmentcomposition.team_id`
+    const query = `select * from employee inner join teamcomposition on teamcomposition.employee_id = employee.employee_id inner join department on department.department_id = teamcomposition.department_id inner join departmentcomposition on departmentcomposition.department_id = teamcomposition.department_id`
 
     db.query(query,(err,res) => {
         if(err) throw err
@@ -16,6 +16,7 @@ adminModel.getMasterPageData = (callback) => {
                 "group/team": res[data]['hybrid_schedule'],
             }
             employeeModel.getEmployeebyId(res[data]['employee_id'], (employee) => {
+                console.log(employee);
                 const {first_name, last_name, PTO, holiday_off, location, work_type, shift_schedule,remarks} = employee
                 row.employeeName = first_name + " " + last_name
                 row.PTO = (PTO == 0)?'Unplanned Leave':'Planned Leave'
@@ -70,3 +71,5 @@ adminModel.addAdmin = (fields) => {
 
 
 module.exports = adminModel
+
+
