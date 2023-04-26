@@ -23,22 +23,24 @@ const departmentDelete = require('./http/delete/department.delete')
 const teamPut = require('./http/put/team.put')
 const departmentPut = require('./http/put/department.put')
 
-// app.use("*", (req, res) => {
-//     const pathname = req.originalUrl.split("?")[0];
+// Kani i change if mag test ka
+const PROD = true;
 
-// app.use(cors({
-//     origin: '*'
-// }));
-
-// app.use(express.urlencoded({ extended: true }));
-
-app.use(express.json())
+if (PROD) {
+    app.use(cors({
+        origin: '*'
+    }));
+    
+    app.use(express.urlencoded({ extended: true }));
+} else {
+    app.use(express.json())
+}
 
 app.use('/api/employee',employeeGet,employeePost)
 app.use('/api/team',teamGet,teamPost,teamDelete, teamPut);
 app.use('/api/teamlead',teamLeadPost)
 app.use('/api/departmentTeams',departmentGet)
-app.use('/api/admin',adminGet)
+app.use('/api/admin',adminGet, adminPost)
 
 app.use('/api/department',departmentDelete, departmentPost, departmentPut)
 app.use('/api/departments',departmentsGet)

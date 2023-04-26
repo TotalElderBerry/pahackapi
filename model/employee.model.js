@@ -40,7 +40,7 @@ employeeModel.getEmployeebyId = (employeeId,callback) => {
 
 
 
-employeeModel.addEmployee = (fields) => {
+employeeModel.addEmployee = (fields, callback) => {
     
     userModel.addUser(fields,(insertId) => {
         const {status,shift_schedule,work_type,PTO} = fields;
@@ -57,7 +57,8 @@ employeeModel.addEmployee = (fields) => {
                 teamModel.addEmployee(fields,res.insertId,(message)=>{
                     console.log(message);
                 })
-                return res.insertId
+                
+                callback(res.insertId)
             }
         })
     })    
