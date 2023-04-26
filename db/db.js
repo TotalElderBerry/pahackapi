@@ -5,7 +5,7 @@ const db_conn = sql.createConnection(
         host: "localhost",
         user: "root",
         password: "password",
-        database: "hackathonapi"
+        database: "hackathondb"
     }
 )
 

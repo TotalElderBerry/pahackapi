@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `department` (
-  `department_id` int NOT NULL,
+  `department_id` int NOT NULL AUTO_INCREMENT,
   `department_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`department_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS `departmentcomposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departmentcomposition` (
-  `department_id` int NOT NULL,
+  `department_id` int NOT NULL AUTO_INCREMENT,
   `team_id` int DEFAULT NULL,
   PRIMARY KEY (`department_id`),
   KEY `team_id` (`team_id`),
@@ -71,9 +71,14 @@ DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
-  `employee_id` int NOT NULL,
+  `employee_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   `status` varchar(45) DEFAULT NULL,
+  `shift_schedule` varchar(2) DEFAULT NULL,
+  `work_type` tinyint DEFAULT NULL,
+  `PTO` tinyint DEFAULT NULL,
+  `holiday_off` tinyint DEFAULT NULL,
+  `locatin` tinyint DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
@@ -97,7 +102,7 @@ DROP TABLE IF EXISTS `team`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
-  `team_id` int NOT NULL,
+  `team_id` int NOT NULL AUTO_INCREMENT,
   `team_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`team_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -120,9 +125,12 @@ DROP TABLE IF EXISTS `teamcomposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamcomposition` (
+  `team_composition_id` int not null AUTO_INCREMENT,
   `team_leader_id` int NOT NULL,
   `employee_id` int DEFAULT NULL,
-  PRIMARY KEY (`team_leader_id`),
+  `team_id` int DEFAULT null,
+  `hybrid_schedule` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`team_composition_id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `teamcomposition_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -145,7 +153,7 @@ DROP TABLE IF EXISTS `teamleader`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamleader` (
-  `team_leader_id` int NOT NULL,
+  `team_leader_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`team_leader_id`),
   KEY `user_id` (`user_id`),
@@ -170,7 +178,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `user_id` int NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
   `last_name` varchar(45) DEFAULT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `middle_name` varchar(45) DEFAULT NULL,

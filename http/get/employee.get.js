@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const employeeModel = require('../model/employee.model')
+const employeeModel = require('../../model/employee.model')
 
 app.get('/', (req,res) => {
     employeeModel.getEmployee((data)=>{

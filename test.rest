@@ -1,0 +1,30 @@
+GET http://localhost:8000/api/employee HTTP/1.1 content-type: application/json
+
+###
+
+GET http://localhost:8000/api/team HTTP/1.1 content-type: application/json
+
+###
+
+GET http://localhost:8000/api/departments HTTP/1.1 content-type: application/json
+
+###
+POST http://localhost:8000/api/employee HTTP/1.1 
+content-type: application/json
+
+{
+    "first_name": "Brian",
+    "last_name": "Lisondra",
+    "middle_name": "Garcia",
+    "email": "brian@gmail.com",
+    "birthdate": "12/12/2001",
+    "gender": "M",
+    "address": "Talamban Cebu",
+    "mobile_number": "09154156111",
+    "status": "active",
+    "shift_schedule": "A",
+    "work_type": 0,
+    "PTO": 0,
+    "holiday_off": 0,
+    "location": 0
+}
