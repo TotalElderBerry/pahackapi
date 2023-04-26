@@ -4,6 +4,20 @@ const userModel = require('./user.model')
 
 const teamModel = {}
 
+teamModel.addTeam = (name, callback) => {
+    const query = `INSERT INTO team (team_name) VALUES (?)`
+
+    db.query(query, [name], (err, res) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+
+        // Get the affected rows
+        callback(res.insertId);
+    });
+};
+
 teamModel.getTeams = (callback) => {
     const query = "SELECT * from team"
    
@@ -16,6 +30,20 @@ teamModel.getTeams = (callback) => {
         callback(res);
     });
 }
+
+teamModel.deleteById = (id, callback) => {
+    const query = `DELETE FROM team WHERE team_id = ?`;
+
+    db.query(query, [id], (err, res) => {
+        if (err) {
+            console.log(err);
+            throw err;
+        }
+
+        // Get the affected rows
+        callback(res.insertId);
+    });
+};
 
 teamModel.getTeambyId = (id,callback) => {
     const query = `SELECT * from departmentcomposition where departmentcomposition.team_id = ${id}`

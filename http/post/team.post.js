@@ -15,5 +15,19 @@ app.post("/:id",(req,res) => {
     }
 })
 
+app.post("/",(req,res) => {
+    const name = req.body.name
+
+    console.log(name);
+
+    try {
+        teamModel.addTeam(name, (id) => {
+            res.status(200).send({ "success": id > 0 })
+        })
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 
 module.exports = app
