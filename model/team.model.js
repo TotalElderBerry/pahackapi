@@ -5,8 +5,16 @@ const userModel = require('./user.model')
 const teamModel = {}
 
 teamModel.getTeams = (callback) => {
-    const query = "SELECT * from teamcomposition"
+    const query = "SELECT * from team"
    
+    db.query(query, (err,res) => {
+        if (err) {
+            console.log(err);
+            throw err
+        }
+
+        callback(res);
+    });
 }
 
 teamModel.getTeambyId = (id,callback) => {
