@@ -14,13 +14,13 @@ POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Brian",
-    "last_name": "Lisondra",
-    "middle_name": "Garcia",
-    "email": "brian@gmail.com",
-    "birth_date": "12/12/2001",
+    "first_name": "Nonito",
+    "last_name": "Donaire",
+    "middle_name": "Hulk",
+    "email": "monito@gmail.com",
+    "birth_date": "11/12/2001",
     "gender": "M",
-    "address": "Talamban Cebu",
+    "address": "Cebu",
     "mobile_number": "09154156111",
     "password": "pass123",
     "status": "active",
@@ -28,7 +28,9 @@ content-type: application/json
     "work_type": 0,
     "PTO": 0,
     "holiday_off": 0,
-    "location": 0
+    "location": 0,
+    "department_id": 1,
+    "team_id": 55
 }
 
 ### add employee into team 

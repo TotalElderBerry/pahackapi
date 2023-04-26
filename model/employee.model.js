@@ -1,4 +1,5 @@
 const db = require('../db/db')
+const teamModel = require('./team.model')
 const userModel = require('./user.model')
 
 const employeeModel = {}
@@ -52,6 +53,9 @@ employeeModel.addEmployee = (fields) => {
             if(err){
                 throw err
             }else{
+                teamModel.addEmployee(fields,res.insertId,(message)=>{
+                    console.log(message);
+                })
                 return res.insertId
             }
         })
@@ -59,7 +63,7 @@ employeeModel.addEmployee = (fields) => {
  }
 
  employeeModel.getEmployees = () => {
-        
+
  }
 
 

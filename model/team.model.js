@@ -106,8 +106,8 @@ teamModel.getSingleTeamEmployees = () => {
 }
 
 
-teamModel.addEmployee = (fields, team_id, callback) => {
-   const {employee_id,department_id} = fields;
+teamModel.addEmployee = (fields,employee_id, callback) => {
+   const {department_id, team_id} = fields;
 
    const query = `INSERT INTO teamcomposition (employee_id,team_id,department_id) values (?,?,?)`
 
