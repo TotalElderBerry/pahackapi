@@ -262,3 +262,12 @@ CREATE TABLE `teamcomposition` (
   CONSTRAINT `teamcomposition_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
   CONSTRAINT `teamcomposition_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `admin` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

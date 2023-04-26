@@ -45,10 +45,9 @@ teamModel.getTeamsbyDepartmentId = (department_id, callback) => {
         }
         if(res.length == 0){
                 const teamInfo = {
-                    "teamleader": {},
-                    "employees": []
+                    
                 }
-                teams.push(teamInfo)
+                // teams.push()
                 callback(teams)
                 return
         }

@@ -58,6 +58,10 @@ employeeModel.addEmployee = (fields) => {
     })    
  }
 
+ employeeModel.getEmployees = () => {
+        
+ }
+
 
 
 module.exports = employeeModel
