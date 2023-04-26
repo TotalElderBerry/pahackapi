@@ -16,6 +16,58 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`admin_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (3,32);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `attendance`
+--
+
+DROP TABLE IF EXISTS `attendance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `attendance` (
+  `attendance_id` int NOT NULL AUTO_INCREMENT,
+  `employee_id` int DEFAULT NULL,
+  `date` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`attendance_id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attendance`
+--
+
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `department`
 --
 
@@ -47,11 +99,19 @@ DROP TABLE IF EXISTS `departmentcomposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `departmentcomposition` (
+  `department_composition_id` int NOT NULL AUTO_INCREMENT,
   `department_id` int DEFAULT NULL,
-  `team_composition_id` int DEFAULT NULL,
-  KEY `team_composition_id` (`team_composition_id`),
-  CONSTRAINT `departmentcomposition_ibfk_1` FOREIGN KEY (`team_composition_id`) REFERENCES `teamcomposition` (`team_composition_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `team_id` int DEFAULT NULL,
+  `team_leader_id` int DEFAULT NULL,
+  `hybrid_schedule` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`department_composition_id`),
+  KEY `department_id` (`department_id`),
+  KEY `team_id` (`team_id`),
+  KEY `team_leader_id` (`team_leader_id`),
+  CONSTRAINT `departmentcomposition_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
+  CONSTRAINT `departmentcomposition_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
+  CONSTRAINT `departmentcomposition_ibfk_3` FOREIGN KEY (`team_leader_id`) REFERENCES `teamleader` (`team_leader_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +120,7 @@ CREATE TABLE `departmentcomposition` (
 
 LOCK TABLES `departmentcomposition` WRITE;
 /*!40000 ALTER TABLE `departmentcomposition` DISABLE KEYS */;
-INSERT INTO `departmentcomposition` VALUES (1,1);
+INSERT INTO `departmentcomposition` VALUES (3,1,55,4,'A'),(4,2,57,5,'A');
 /*!40000 ALTER TABLE `departmentcomposition` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,10 +140,11 @@ CREATE TABLE `employee` (
   `PTO` tinyint DEFAULT NULL,
   `holiday_off` tinyint DEFAULT NULL,
   `locatin` tinyint DEFAULT NULL,
+  `remarks` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`employee_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `employee_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +153,7 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,1,'teststatus','A',0,0,0,0),(2,12,'active','A',0,0,0,0);
+INSERT INTO `employee` VALUES (6,16,'active','A',0,0,0,0,NULL),(7,20,'active','A',0,0,0,0,NULL),(9,31,'active','A',0,0,0,0,NULL),(10,33,'active','A',0,0,0,0,NULL),(11,34,'active','A',0,0,0,0,NULL);
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +168,7 @@ CREATE TABLE `team` (
   `team_id` int NOT NULL AUTO_INCREMENT,
   `team_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +177,7 @@ CREATE TABLE `team` (
 
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
-INSERT INTO `team` VALUES (1,'COMPLIANCE SUPPORT'),(2,'CORPORATE'),(3,'CUSTOMER SUPPORT'),(4,'DATA ANALYST'),(5,'FINANCE'),(6,'HUMAN RESOURCE AND ADMIN'),(7,'INFORMATION TECHNOLOGY'),(8,'INTERNAL SOURCING'),(9,'IT BIZOPS TEAM'),(10,'IT HELPDESK TEAM'),(11,'IT OPERATIONS,HELPDESK TEAM'),(12,'IT SYSOPS TEAM'),(13,'MANUAL JOB DELIVERY'),(14,'MARKETING AND SALES'),(15,'ONBOARDING SUPPORT'),(16,'OPERATIONS'),(17,'OTHER SOFTWARE DEV'),(18,'POSTING SUPPORT'),(19,'PRODUCT DESIGN'),(20,'PROGRAMMATIC SUPPORT'),(21,'QUALITY ASSURANCE'),(22,'SOFTWARE DEV TEAM 1'),(23,'SOFTWARE DEV TEAM 2'),(24,'SOFTWARE DEVELOPMENT'),(25,'TECHNICAL SUPPORT'),(26,'TRAINING AND CONTENT'),(27,'TRIAGE TEAM');
+INSERT INTO `team` VALUES (55,'COMPLIANCE SUPPORT'),(56,'CORPORATE'),(57,'CUSTOMER SUPPORT'),(58,'DATA ANALYST'),(59,'FINANCE'),(60,'HUMAN RESOURCE AND ADMIN'),(61,'INFORMATION TECHNOLOGY'),(62,'INTERNAL SOURCING'),(63,'IT BIZOPS TEAM'),(64,'IT HELPDESK TEAM'),(65,'IT OPERATIONS,HELPDESK TEAM'),(66,'IT SYSOPS TEAM'),(67,'MANUAL JOB DELIVERY'),(68,'MARKETING AND SALES'),(69,'ONBOARDING SUPPORT'),(70,'OPERATIONS'),(71,'OTHER SOFTWARE DEV'),(72,'POSTING SUPPORT'),(73,'PRODUCT DESIGN'),(74,'PROGRAMMATIC SUPPORT'),(75,'QUALITY ASSURANCE'),(76,'SOFTWARE DEV TEAM 1'),(77,'SOFTWARE DEV TEAM 2'),(78,'SOFTWARE DEVELOPMENT'),(79,'TECHNICAL SUPPORT'),(80,'TRAINING AND CONTENT'),(81,'TRIAGE TEAM');
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,18 +190,17 @@ DROP TABLE IF EXISTS `teamcomposition`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `teamcomposition` (
   `team_composition_id` int NOT NULL AUTO_INCREMENT,
-  `team_leader_id` int NOT NULL,
+  `department_id` int NOT NULL,
+  `team_id` int NOT NULL,
   `employee_id` int DEFAULT NULL,
-  `team_id` int DEFAULT NULL,
-  `hybrid_schedule` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`team_composition_id`),
-  KEY `employee_id` (`employee_id`),
-  KEY `team_leader_id` (`team_leader_id`),
+  KEY `department_id` (`department_id`),
   KEY `team_id` (`team_id`),
-  CONSTRAINT `teamcomposition_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`),
-  CONSTRAINT `teamcomposition_ibfk_2` FOREIGN KEY (`team_leader_id`) REFERENCES `teamleader` (`team_leader_id`),
-  CONSTRAINT `teamcomposition_ibfk_3` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `teamcomposition_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
+  CONSTRAINT `teamcomposition_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
+  CONSTRAINT `teamcomposition_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,6 +209,7 @@ CREATE TABLE `teamcomposition` (
 
 LOCK TABLES `teamcomposition` WRITE;
 /*!40000 ALTER TABLE `teamcomposition` DISABLE KEYS */;
+INSERT INTO `teamcomposition` VALUES (2,1,55,6),(3,1,55,7),(4,2,57,9),(5,2,57,10),(6,2,57,11);
 /*!40000 ALTER TABLE `teamcomposition` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +226,7 @@ CREATE TABLE `teamleader` (
   PRIMARY KEY (`team_leader_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `teamleader_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +235,7 @@ CREATE TABLE `teamleader` (
 
 LOCK TABLES `teamleader` WRITE;
 /*!40000 ALTER TABLE `teamleader` DISABLE KEYS */;
-INSERT INTO `teamleader` VALUES (1,1);
+INSERT INTO `teamleader` VALUES (4,19),(5,35);
 /*!40000 ALTER TABLE `teamleader` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -197,7 +258,7 @@ CREATE TABLE `user` (
   `mobile_number` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -206,7 +267,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'testfname','testlname','testmname','test@test.com','06/14/01','M','Talamban','0919191910','testpass'),(12,'Lisondra','Brian','Garcia','brian@gmail.com',NULL,'M','Talamban Cebu','09154156111',NULL);
+INSERT INTO `user` VALUES (16,'Lisondra','Brian','Garcia','brian@gmail.com','12/12/2001','M','Talamban Cebu','09154156111','pass123'),(19,'James','TL Lebron','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123'),(20,'Donaire','Nonito','Hulk','monito@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(30,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(31,'Mayweeathger','Floyd','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(32,NULL,NULL,NULL,'Kyire@gmail.com',NULL,NULL,NULL,NULL,'pass123'),(33,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(34,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(35,'James','TL Kobe','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -219,82 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-26 11:34:33
-
-CREATE TABLE `departmentcomposition` (
-  `department_composition_id` int NOT NULL AUTO_INCREMENT,
-  `department_id` int DEFAULT NULL,
-  `team_id` int DEFAULT NULL,
-  `team_leader_id` int DEFAULT NULL,
-  `hybrid_schedule` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`department_composition_id`),
-  KEY `department_id` (`department_id`),
-  KEY `team_id` (`team_id`),
-  KEY `team_leader_id` (`team_leader_id`),
-  CONSTRAINT `departmentcomposition_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
-  CONSTRAINT `departmentcomposition_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
-  CONSTRAINT `departmentcomposition_ibfk_3` FOREIGN KEY (`team_leader_id`) REFERENCES `teamleader` (`team_leader_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-DROP TABLE IF EXISTS `team`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `team` (
-  `team_id` int NOT NULL AUTO_INCREMENT,
-  `team_name` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`team_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-DROP TABLE IF EXISTS `teamcomposition`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teamcomposition` (
-  `team_composition_id` int NOT NULL AUTO_INCREMENT,
-  `department_id` int NOT NULL,
-  `team_id` int NOT NULL,
-  `employee_id` int DEFAULT NULL,
-  PRIMARY KEY (`team_composition_id`),
-  KEY `department_id` (`department_id`),
-  KEY `team_id` (`team_id`),
-  KEY `employee_id` (`employee_id`),
-  CONSTRAINT `teamcomposition_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`),
-  CONSTRAINT `teamcomposition_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
-  CONSTRAINT `teamcomposition_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-CREATE TABLE `admin` (
-  `admin_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  PRIMARY KEY (`admin_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-CREATE TABLE `attendance` (
-  `attendance_id` int NOT NULL AUTO_INCREMENT,
-  `employee_id` int DEFAULT NULL,
-  `date` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`attendance_id`),
-  KEY `employee_id` (`employee_id`),
-  CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-SELECT d.department_name AS department,
-       t.team_name AS `group/team`,
-       CONCAT(u.first_name, ' ', u.last_name) AS employeeName,
-       e.PTO,
-       e.holiday_off,
-       e.locatin AS location,
-       e.work_type,
-       e.shift_schedule,
-       e.remarks
-FROM user u
-INNER JOIN employee e ON u.user_id = e.user_id
-INNER JOIN teamcomposition tc ON e.employee_id = tc.employee_id
-INNER JOIN team t ON tc.team_id = t.team_id
-INNER JOIN departmentcomposition dc ON t.team_id = dc.team_id
-INNER JOIN department d ON dc.department_id = d.department_id;
+-- Dump completed on 2023-04-27  1:41:37
