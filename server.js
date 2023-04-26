@@ -13,6 +13,8 @@ const teamLeadPost = require('./http/post/teamlead.post')
 
 const teamsGet = require('./http/get/teams.get')
 
+const teamDelete = require('./http/delete/team.delete')
+
 // app.use("*", (req, res) => {
 //     const pathname = req.originalUrl.split("?")[0];
 
@@ -25,10 +27,10 @@ app.use(cors({
     origin: '*'
 }));
 
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/employee',employeeGet,employeePost)
-app.use('/api/team',teamGet,teamPost)
+app.use('/api/team',teamGet,teamPost,teamDelete);
 app.use('/api/teamlead',teamLeadPost)
 app.use('/api/departments',departmentGet)
 app.use('/api/admin',adminGet)
