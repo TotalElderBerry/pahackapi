@@ -40,8 +40,7 @@ adminModel.getAdmins = (callback) => {
             const all_admin = []
             for(const emp in res){
                 const admin = {}
-                admin.admin_id = res[emp]['team_leader_id'],
-                admin.name = res[emp]['first_name'] + " " + res[emp]['last_name']
+                admin.admin_id = res[emp]['admin_id'],
                 admin.email = res[emp]['email'],
                 admin.password = res[emp]['password']
                 all_admin.push(admin)
@@ -55,17 +54,17 @@ adminModel.addAdmin = (fields) => {
     
     userModel.addUser(fields,(insertId) => {
 
-        // const query = 'INSERT INTO admin (user_id) values (?)'
+        const query = 'INSERT INTO admin (user_id) values (?)'
 
-        // db.query(query,[insertId],(err,res) => {
-        //     console.log("inside callback");
-        //     console.log(err);
-        //     if(err){
-        //         throw err
-        //     }else{
-        //         return res.insertId
-        //     }
-        // })
+        db.query(query,[insertId],(err,res) => {
+            console.log("inside callback");
+            console.log(err);
+            if(err){
+                throw err
+            }else{
+                return res.insertId
+            }
+        })
     })    
  }
 

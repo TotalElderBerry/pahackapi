@@ -22,11 +22,13 @@ const teamPut = require('./http/put/team.put')
 // app.use("*", (req, res) => {
 //     const pathname = req.originalUrl.split("?")[0];
 
-app.use(cors({
-    origin: '*'
-}));
+// app.use(cors({
+//     origin: '*'
+// }));
 
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
+
+app.use(express.json())
 
 app.use('/api/employee',employeeGet,employeePost)
 app.use('/api/team',teamGet,teamPost,teamDelete, teamPut);

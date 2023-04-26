@@ -24,10 +24,10 @@ POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Nonito",
-    "last_name": "Donaire",
+    "first_name": "Floyd",
+    "last_name": "Mayweeathger",
     "middle_name": "Hulk",
-    "email": "monito@gmail.com",
+    "email": "hahah@gmail.com",
     "birth_date": "11/12/2001",
     "gender": "M",
     "address": "Cebu",
@@ -37,10 +37,8 @@ content-type: application/json
     "shift_schedule": "A",
     "work_type": 0,
     "PTO": 0,
-    "holiday_off": 0,
-    "location": 0,
-    "department_id": 1,
-    "team_id": 55
+    "department_id": 2,
+    "team_id": 57
 }
 
 ### add employee into team 
@@ -77,13 +75,7 @@ POST http://localhost:8000/api/admin HTTP/1.1
 content-type: application/json
 
 {
-    "first_name": "Admin Kyriw",
-    "last_name": "Irving",
-    "middle_name": "Poole",
+   
     "email": "Kyire@gmail.com",
-    "birth_date": "10/12/2000",
-    "gender": "M",
-    "address": "Talamban Cebu",
-    "mobile_number": "09154156111",
-    "password": "pass123",
+    "password": "pass123"
 }
