@@ -26,10 +26,8 @@ app.post("/",(req,res) => {
             return;
         }
 
-        console.log("ADMIN:", result);
-
         if (result.length > 0) {
-            res.send({ type: 1, id: result[0].user_id })
+            res.send({ type: 1, id: result[0].admin_id })
             return;
         }
 
@@ -42,7 +40,7 @@ app.post("/",(req,res) => {
             console.log("EMPLOYEE:", result);
     
             if (result.length > 0) {
-                res.send({ type: 2, id: result[0].user_id })
+                res.send({ type: 2, id: result[0].employee_id })
                 return;
             }
 
@@ -55,7 +53,7 @@ app.post("/",(req,res) => {
                 console.log("TEAMLEAD:", result);
         
                 if (result.length > 0) {
-                    res.send({ type: 3, id: result[0].user_id })
+                    res.send({ type: 3, id: result[0].team_leader_id })
                     return;
                 }
 
