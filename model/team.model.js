@@ -74,8 +74,11 @@ teamModel.deleteById = (id, callback) => {
 };
 
 teamModel.getTeambyId = (id,callback) => {
-    const query = `SELECT * from departmentcomposition where departmentcomposition.team_id = ${id}`
-
+    const query = `SELECT * from team where team_id = ${id}`
+    db.query(query,(err,res) => {
+        if(err) throw err
+        callback(res)
+    })
 }
 
 teamModel.getTeamsbyDepartmentId = (department_id, callback) => {

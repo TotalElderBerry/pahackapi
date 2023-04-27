@@ -1,5 +1,7 @@
 const db = require('../db/db')
+const departmentModel = require('./department.model')
 const employeeModel = require('./employee.model')
+const teamModel = require('./team.model')
 const userteamleadmodel = require('./userteamlead.model')
 
 const teamleadModel = {}
@@ -45,27 +47,31 @@ teamleadModel.getTeamLeadTeam = (team_leader_id,callback) => {
         if(err) throw err
         teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (teamleader) => {
 
-            
-
             const teamleaderobj = teamleader
             teamleaderobj.department_id = res[0]['department_id']
-            teamleaderobj.employees = []
-            for(const emp in res){
-                userteamleadmodel.getEmployeebyId(res[emp]['employee_id'], (employee) => {
-                    const emps = {}
-                    emps.employee_name = employee.first_name +" "+employee.last_name
-                    emps.shift_schedule = employee.shift_schedule
-                    emps.group = res[emp]['hybrid_schedule']
-                    emps.work_type = employee.work_type
-                    emps.PTO = employee.PTO
-                    emps.holiday_off = employee.holiday_off
-                    emps.location = employee.location
-                    teamleaderobj.employees.push(emps)
-                    callback(teamleaderobj,res)
+            teamModel.getTeambyId(res[0]['team_id'], (resteam) => {
+                teamleaderobj.team_name = resteam[0]['team_name']
+                departmentModel.getDepartmentbyId(res[0]['department_id'], (resdep) => {
+                    teamleaderobj.department_name = resdep[0]['department_name']
+                    teamleaderobj.employees = []
+                    for(const emp in res){
+                        userteamleadmodel.getEmployeebyId(res[emp]['employee_id'], (employee) => {
+                            const emps = {}
+                            emps.employee_name = employee.first_name +" "+employee.last_name
+                            emps.shift_schedule = employee.shift_schedule
+                            emps.group = res[emp]['hybrid_schedule']
+                            emps.work_type = employee.work_type
+                            emps.PTO = employee.PTO
+                            emps.holiday_off = employee.holiday_off
+                            emps.location = employee.location
+                            teamleaderobj.employees.push(emps)
+                            callback(teamleaderobj,res)
+                        })
+        
+                    }
                 })
-
-            }
-        })
+            })
+            })
     })
     
 }

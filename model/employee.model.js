@@ -104,11 +104,14 @@ employeeModel.getUserEmployee = (employee_id,callback) =>{
             data.PTO = employee.PTO
             data.holiday_off = employee.holiday_off
             data.location = data.location
-            teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (team_lead) => {
-                data.team_leader_name = team_lead.first_name + " " + team_lead.last_name
-                attendanceModel.getAttendanceOfEmployee(employee_id, (res) => {
-                    data.proattendancebonus = getAccumulatedAttendanceBonus(res,'3')
-                    callback(data)
+            teamModel.getTeambyId(res[0]['team_id'],(resteam) => {
+                data.team_name = resteam[0]['team_name'],
+                teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (team_lead) => {
+                    data.team_leader_name = team_lead.first_name + " " + team_lead.last_name
+                    attendanceModel.getAttendanceOfEmployee(employee_id, (res) => {
+                        data.proattendancebonus = getAccumulatedAttendanceBonus(res,'3')
+                        callback(data)
+                    })
                 })
             })
         })

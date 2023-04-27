@@ -16,6 +16,15 @@ departmentModel.addDepartment = (name, callback) => {
     });
 };
 
+departmentModel.getDepartmentbyId = (id, callback) => {
+    const query = `SELECT * from department where department_id = ${id}`
+
+    db.query(query,(err,res) => {
+        if(err) throw err
+        callback(res)
+    })
+}
+
 departmentModel.editDepartment = (id, name, callback) => {
     const query = `UPDATE department SET department_name = ? WHERE department_id = ?`
 
