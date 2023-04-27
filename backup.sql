@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: hackathondb
 -- ------------------------------------------------------
--- Server version	8.0.32-0ubuntu0.22.04.2
+-- Server version	8.0.33
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `admin` (
   `admin_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -47,15 +47,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `attendance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `attendance` (
   `attendance_id` int NOT NULL AUTO_INCREMENT,
   `employee_id` int DEFAULT NULL,
   `date` varchar(20) DEFAULT NULL,
+  `month` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`attendance_id`),
   KEY `employee_id` (`employee_id`),
   CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -64,6 +65,7 @@ CREATE TABLE `attendance` (
 
 LOCK TABLES `attendance` WRITE;
 /*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+INSERT INTO `attendance` VALUES (2,6,'27','3'),(3,6,'26','3'),(4,6,'25','3'),(5,6,'25','4');
 /*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,12 +75,12 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `department` (
   `department_id` int NOT NULL AUTO_INCREMENT,
   `department_name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +99,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `departmentcomposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `departmentcomposition` (
   `department_composition_id` int NOT NULL AUTO_INCREMENT,
   `department_id` int DEFAULT NULL,
@@ -130,7 +132,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
   `employee_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -163,7 +165,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `team`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `team` (
   `team_id` int NOT NULL AUTO_INCREMENT,
   `team_name` varchar(45) DEFAULT NULL,
@@ -187,7 +189,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teamcomposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamcomposition` (
   `team_composition_id` int NOT NULL AUTO_INCREMENT,
   `department_id` int NOT NULL,
@@ -219,7 +221,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `teamleader`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `teamleader` (
   `team_leader_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
@@ -245,7 +247,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `last_name` varchar(45) DEFAULT NULL,
@@ -267,7 +269,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (16,'Lisondra','Brian','Garcia','brian@gmail.com','12/12/2001','M','Talamban Cebu','09154156111','pass123'),(19,'James','TL Lebron','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123'),(20,'Donaire','Nonito','Hulk','monito@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(30,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(31,'Mayweeathger','Floyd','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(32,NULL,NULL,NULL,'Kyire@gmail.com',NULL,NULL,NULL,NULL,'pass123'),(33,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(34,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(35,'James','TL Kobe','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123');
+INSERT INTO `user` VALUES (16,'Lisondra','Brian','Garcia','brian@gmail.com','12/12/2001','M','Talamban Cebu','09154156111','pass123'),(19,'James','TL Lebron','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123'),(20,'Donaire','Nonito','Hulk','monito@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(23,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(24,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(25,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(26,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(27,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(28,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(30,'Irving','Admin Kyriw','Poole','Kyire@gmail.com','10/12/2000','M','Talamban Cebu','09154156111','pass123'),(31,'Mayweeathger','Floyd','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(32,NULL,NULL,NULL,'mouse@gmail.com',NULL,NULL,NULL,NULL,'pass123'),(33,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(34,'tesdtsat','Anotherpne','Hulk','hahah@gmail.com','11/12/2001','M','Cebu','09154156111','pass123'),(35,'James','TL Kobe','Lisondra','lebron@gmail.com','10/12/2001','M','Talamban Cebu','09154156111','pass123');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -280,4 +282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-27  1:41:37
+-- Dump completed on 2023-04-27 10:43:16

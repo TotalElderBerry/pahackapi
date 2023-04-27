@@ -44,7 +44,7 @@ app.post("/",(req,res) => {
                 return;
             }
 
-            db.query("SELECT * FROM teamlead t INNER JOIN user u ON t.user_id = u.user_id WHERE u.email = ? AND u.password = ?", [email, password], (err, result) => {
+            db.query("SELECT * FROM teamleader t INNER JOIN user u ON t.user_id = u.user_id WHERE u.email = ? AND u.password = ?", [email, password], (err, result) => {
                 if (err) {
                     res.send({ error: "Internal server error!" });
                     return;

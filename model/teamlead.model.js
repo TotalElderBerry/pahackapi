@@ -45,6 +45,8 @@ teamleadModel.getTeamLeadTeam = (team_leader_id,callback) => {
         if(err) throw err
         teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (teamleader) => {
 
+            
+
             const teamleaderobj = teamleader
             teamleaderobj.department_id = res[0]['department_id']
             teamleaderobj.employees = []

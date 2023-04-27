@@ -1,9 +1,6 @@
-GET http://localhost:8000/api/employee HTTP/1.1
+GET http://localhost:8000/api/employee/6 HTTP/1.1
 content-type: application/json
 
-{
-    "employee_id": 6
-}
 ###
 
 GET http://localhost:8000/api/team HTTP/1.1 content-type: application/json
@@ -25,7 +22,7 @@ content-type: application/json
 
 ### get teamlead
 
-GET http://localhost:8000/api/teamlead/4 HTTP/1.1
+GET http://localhost:8000/api/teamlead/5 HTTP/1.1
 content-type: application/json
 
 
