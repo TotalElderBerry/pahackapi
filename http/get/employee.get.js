@@ -5,9 +5,9 @@ const employeeModel = require('../../model/employee.model')
 
 app.get('/', (req,res) => {
     const {employee_id} = req.body
+    console.log(employee_id);
     employeeModel.getUserEmployee(employee_id,(data)=>{
         res.status(200).send({"employee":data})
-        console.log(data);
     })
 })
 

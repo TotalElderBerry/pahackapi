@@ -1,7 +1,10 @@
 const db = require('../db/db')
+const attendanceModel = require('./attendance.model')
 const teamModel = require('./team.model')
 const teamleadModel = require('./teamlead.model')
 const userModel = require('./user.model')
+
+const getAccumulatedAttendanceBonus = require('../functions/attendance-bonus')
 
 const employeeModel = {}
 
@@ -103,8 +106,10 @@ employeeModel.getUserEmployee = (employee_id,callback) =>{
             data.location = data.location
             teamleadModel.getTeamLeadbyId(res[0]['team_leader_id'], (team_lead) => {
                 data.team_leader_name = team_lead.first_name + " " + team_lead.last_name
-                console.log(data);
-                callback(data)
+                attendanceModel.getAttendanceOfEmployee(employee_id, (res) => {
+                    data.proattendancebonus = getAccumulatedAttendanceBonus(res,'3')
+                    callback(data)
+                })
             })
         })
     })

@@ -14,24 +14,15 @@ attendanceModel.addAttendance = (employee_id, callback) => {
     })
 }
 
-attendanceModel.getAttendanceOfStudent = (student_id) => {
-    const query = ` select * from attendance where employee_id = ${student_id}`
+attendanceModel.getAttendanceOfEmployee = (employee, callback) => {
+    const query = ` select * from attendance where employee_id = ${employee}`
 
     db.query(query,(err,res) => {
         if(err) throw err
-        getAccumulatedAttendanceBonus(res,2)
+        callback(res)
     })
 }
 
-const getAccumulatedAttendanceBonus = (records,month) => {
-    const monthVal = month + " "
-    
-    const filteredrecords = records.filter((r) => r.month = monthVal)
-    console.log(filteredrecords);
-    for(const r in records){
-
-    }
-}
 
 module.exports = attendanceModel
 

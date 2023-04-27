@@ -3,8 +3,8 @@ const app = express()
 
 const teamLeadModel = require('../../model/teamlead.model')
 
-app.get('/', (req,res) => {
-    const {team_lead_id} = req.body
+app.get('/:id', (req,res) => {
+    const {team_lead_id} = req.params.id
     console.log(team_lead_id);
     teamLeadModel.getTeamLeadTeam(team_lead_id,(results, orig)=>{
         console.log(results);
