@@ -32,7 +32,7 @@ const departmentPut = require('./http/put/department.put')
 const shiftSchedPut = require('./http/put/shiftsched.put')
 
 // Kani i change if mag test ka
-const PROD = true;
+const PROD = false;
 
 if (PROD) {
     app.use(cors({
