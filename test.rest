@@ -25,12 +25,10 @@ content-type: application/json
 
 ### get teamlead
 
-GET http://localhost:8000/api/teamlead HTTP/1.1
+GET http://localhost:8000/api/teamlead/4 HTTP/1.1
 content-type: application/json
 
-{
-    "team_lead_id": 4
-}
+
 
 ### add employee
 POST http://localhost:8000/api/employee HTTP/1.1
