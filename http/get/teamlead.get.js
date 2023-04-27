@@ -5,6 +5,7 @@ const teamLeadModel = require('../../model/teamlead.model')
 
 app.get('/', (req,res) => {
     const {team_lead_id} = req.body
+    console.log(team_lead_id);
     teamLeadModel.getTeamLeadTeam(team_lead_id,(results, orig)=>{
         console.log(results);
         if(orig.length == results.employees.length){

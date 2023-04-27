@@ -1,5 +1,6 @@
 const db = require('../db/db')
 const employeeModel = require('./employee.model')
+const userteamleadmodel = require('./userteamlead.model')
 
 const teamleadModel = {}
 
@@ -48,7 +49,7 @@ teamleadModel.getTeamLeadTeam = (team_leader_id,callback) => {
             teamleaderobj.department_id = res[0]['department_id']
             teamleaderobj.employees = []
             for(const emp in res){
-                employeeModel.getEmployeebyId(res[emp]['employee_id'], (employee) => {
+                userteamleadmodel.getEmployeebyId(res[emp]['employee_id'], (employee) => {
                     const emps = {}
                     emps.employee_name = employee.first_name +" "+employee.last_name
                     emps.shift_schedule = employee.shift_schedule
@@ -60,6 +61,7 @@ teamleadModel.getTeamLeadTeam = (team_leader_id,callback) => {
                     teamleaderobj.employees.push(emps)
                     callback(teamleaderobj,res)
                 })
+
             }
         })
     })

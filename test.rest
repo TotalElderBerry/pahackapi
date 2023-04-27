@@ -31,6 +31,7 @@ content-type: application/json
 {
     "team_lead_id": 4
 }
+
 ### add employee
 POST http://localhost:8000/api/employee HTTP/1.1
 content-type: application/json
@@ -58,6 +59,14 @@ content-type: application/json
     "department_id": 1,
     "employee_id": 6    
 }
+
+### add attendance 
+POST http://localhost:8000/api/attendance/6 HTTP/1.1 
+content-type: application/json
+
+### add attendance 
+GET http://localhost:8000/api/attendance/6 HTTP/1.1 
+content-type: application/json
 
 
 
