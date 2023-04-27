@@ -17,6 +17,7 @@ const teamLeadPost = require('./http/post/teamlead.post')
 const teamLeadGet = require('./http/get/teamlead.get')
 const departmentPost = require('./http/post/department.post')
 const shiftschedPost = require('./http/post/shiftsched.post')
+const loginPost = require("./http/post/login.post");
 
 const teamsGet = require('./http/get/teams.get')
 
@@ -54,6 +55,7 @@ app.use('/api/department',departmentDelete, departmentPost, departmentPut)
 app.use('/api/departments',departmentsGet)
 app.use('/api/teams',teamsGet)
 app.use('/api/users',usersGet)
+app.use('/api/login', loginPost);
 
 app.listen(8000,() => {
     console.log("Listening at port 8000");
