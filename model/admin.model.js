@@ -10,6 +10,16 @@ adminModel.getMasterPageData = (callback) => {
     db.query(query,(err,res) => {
         if(err) throw err
         const all = []
+        
+        if (!res) {
+            callback([]);
+            return;
+        }
+        
+        if(res.length == 0){
+            callback([])
+            return
+        }
         for(const data in res){
             const row = {
                 "department": res[data]['department_name'],
@@ -29,6 +39,7 @@ adminModel.getMasterPageData = (callback) => {
                 callback(all,res)
             })
         }
+        
         console.log(all);
     })
 }

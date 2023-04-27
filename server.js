@@ -21,6 +21,11 @@ const loginPost = require("./http/post/login.post");
 const attendancePost = require('./http/post/attendance.post')
 const attendanceGet = require('./http/get/attendance.get')
 
+const hazardPayGet = require('./http/get/hazardpays.get')
+const hazardPayPost = require('./http/post/hazardpays.post')
+const hazardPayPut = require('./http/put/hazardpays.put')
+const hazardPayDelete = require('./http/delete/hazardpays.delete')
+
 const teamsGet = require('./http/get/teams.get')
 
 const teamDelete = require('./http/delete/team.delete')
@@ -32,7 +37,7 @@ const departmentPut = require('./http/put/department.put')
 const shiftSchedPut = require('./http/put/shiftsched.put')
 
 // Kani i change if mag test ka
-const PROD = false;
+const PROD = true;
 
 if (PROD) {
     app.use(cors({
@@ -59,6 +64,8 @@ app.use('/api/teams',teamsGet)
 app.use('/api/users',usersGet)
 app.use('/api/login', loginPost);
 app.use('/api/attendance',attendanceGet,attendancePost)
+app.use('/api/hazardPay',hazardPayPost,hazardPayPut,hazardPayDelete)
+app.use('/api/hazardPays', hazardPayGet)
 
 app.listen(8000,() => {
     console.log("Listening at port 8000");

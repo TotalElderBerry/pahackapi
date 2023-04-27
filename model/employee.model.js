@@ -52,17 +52,22 @@ employeeModel.addEmployee = (fields, callback) => {
         const query = 'INSERT INTO employee (user_id,status,shift_schedule,work_type,PTO,holiday_off,locatin) values (?,?,"A",0,0,0,0)'
         console.log(status);
 
-        db.query(query,[insertId,status,],(err,res) => {
+        db.query(query,[insertId,status],(err,res) => {
             console.log("inside callback");
             console.log(err);
             if(err){
                 throw err
             }else{
-                teamModel.addEmployee(fields,res.insertId,(message)=>{
-                    console.log(message);
-                })
-                
-                callback(res.insertId)
+                try {
+                    teamModel.addEmployee(fields,res.insertId,(message)=>{
+                        console.log(message);
+                    })
+                    
+                    callback(res.insertId)
+                    
+                } catch (error) {
+                    console.log(error);
+                }
             }
         })
     })    
@@ -110,6 +115,7 @@ employeeModel.getUserEmployee = (employee_id,callback) =>{
                     data.team_leader_name = team_lead.first_name + " " + team_lead.last_name
                     attendanceModel.getAttendanceOfEmployee(employee_id, (res) => {
                         data.proattendancebonus = getAccumulatedAttendanceBonus(res,'3')
+                        data.hazardpay = 0
                         callback(data)
                     })
                 })

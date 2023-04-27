@@ -180,8 +180,8 @@ teamModel.addEmployee = (fields,employee_id, callback) => {
 
    db.query(query,[employee_id,team_id, department_id], (err,res)=>{
         if(err) {
-            callback("Failed")
-            return
+            console.log(err);
+            throw err
         }
         callback("Success")
         
